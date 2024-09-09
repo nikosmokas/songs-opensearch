@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getSongs } from "../services/songService"; // Adjust path as needed
+import { getSongs } from "../services/songService";
 import ErrorPage from "./ErrorPage";
 
 const ResultsPage = () => {
@@ -8,7 +8,7 @@ const ResultsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const location = useLocation();
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   useEffect(() => {
     const query = new URLSearchParams(location.search).get("query");
@@ -20,8 +20,8 @@ const ResultsPage = () => {
   const fetchSongs = async (query) => {
     try {
       const response = await getSongs(query);
-      console.log("Fetched data:", response); // Check the structure of response here
-      setResults(response || []); // Ensure results is set to an array
+      console.log("Fetched data:", response);
+      setResults(response || []);
     } catch (error) {
       console.error("Error fetching songs:", error);
       setError("Error fetching songs");

@@ -5,15 +5,14 @@ const client = require("../services/opensearchClient");
 
 // Search route
 router.get("/", async (req, res) => {
-  console.log("Query params:", req.query); // Debugging line
+  console.log("Query params:", req.query);
   try {
-    // Define your search query
     const query = {
       index: "songs",
       body: {
         query: {
           match: {
-            title: req.query.q, // Should match frontend parameter
+            title: req.query.q,
           },
         },
       },

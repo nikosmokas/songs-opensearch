@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import ErrorPage from "./ErrorPage"; // Import the ErrorPage component
+import ErrorPage from "./ErrorPage";
 
 const SearchPage = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
-  const [error, setError] = useState(null); // Add error state
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleSearch = async (event) => {
@@ -14,19 +14,19 @@ const SearchPage = () => {
     if (query.trim()) {
       try {
         const response = await axios.get(`/api/search`, {
-          params: { q: query }, // Ensure the param matches 'q'
+          params: { q: query },
         });
         setResults(response.data);
         navigate(`/results?query=${encodeURIComponent(query)}`);
       } catch (error) {
         console.error("Error fetching data:", error);
-        setError("Error fetching data. Please try again later."); // Set error message
+        setError("Error fetching data. Please try again later.");
       }
     }
   };
 
   if (error) {
-    return <ErrorPage message={error} />; // Display ErrorPage component
+    return <ErrorPage message={error} />;
   }
 
   return (
